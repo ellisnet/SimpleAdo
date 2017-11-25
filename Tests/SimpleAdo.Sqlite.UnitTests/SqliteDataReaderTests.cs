@@ -16,12 +16,14 @@ namespace SimpleAdo.Sqlite.UnitTests
         private readonly string selectSql1 = "SELECT {0} FROM {1} ORDER BY {2};";
         private readonly string selectSql2 = "SELECT {0} FROM {1} ORDER BY {2} LIMIT 1;";
 
-        private readonly Tuple<DateTime, string>[] sampleData =
+        private readonly Tuple<DateTime, string>[] _sampleData =
         {
             new Tuple<DateTime, string>(DateTime.Now, "Current date & time"),
             new Tuple<DateTime, string>(DateTime.MinValue, "Earliest possible date & time"),
             new Tuple<DateTime, string>(DateTime.MaxValue, "Latest possible date & time"),
         };
+
+        #region Write and then read data tests
 
         [Test]
         public void WriteAndReadData_BasicColumns_IsSuccessful()
@@ -43,7 +45,7 @@ namespace SimpleAdo.Sqlite.UnitTests
                 using (var cmd = new SqliteCommand(String.Format(insertSql1, tableName), db))
                 {
                     //Adding my records
-                    foreach (Tuple<DateTime, string> dataItem in sampleData)
+                    foreach (Tuple<DateTime, string> dataItem in _sampleData)
                     {
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add("@date", dataItem.Item1);
@@ -62,8 +64,8 @@ namespace SimpleAdo.Sqlite.UnitTests
                     while (reader.Read())
                     {
                         Assert.AreEqual((dataItemIndex + 1), reader.GetInt64("IdColumn"));
-                        Assert.AreEqual(sampleData[dataItemIndex].Item1, reader.GetDateTime("DateTimeColumn"));
-                        Assert.AreEqual(sampleData[dataItemIndex].Item2, reader.GetString("TextColumn"));
+                        Assert.AreEqual(_sampleData[dataItemIndex].Item1, reader.GetDateTime("DateTimeColumn"));
+                        Assert.AreEqual(_sampleData[dataItemIndex].Item2, reader.GetString("TextColumn"));
 
                         dataItemIndex++;
                     }
@@ -123,7 +125,7 @@ namespace SimpleAdo.Sqlite.UnitTests
                 using (var cmd = new SqliteCommand(String.Format(insertSql2, tableName), db))
                 {
                     //Adding my records
-                    foreach (Tuple<DateTime, string> dataItem in sampleData)
+                    foreach (Tuple<DateTime, string> dataItem in _sampleData)
                     {
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add("@date", dataItem.Item1);
@@ -140,9 +142,9 @@ namespace SimpleAdo.Sqlite.UnitTests
                 {
                     while (reader.Read())
                     {
-                        Assert.AreEqual(sampleData[dataItemIndex].Item2, reader.GetString("TextColumn"));
-                        Assert.AreNotEqual(sampleData[dataItemIndex].Item2, reader.GetString("EncryptedColumn")); //The encrypted text should not match the unencrypted text
-                        Assert.AreEqual(sampleData[dataItemIndex].Item2, reader.GetDecrypted<string>("EncryptedColumn")); //The decrypted text should match the unencrypted text
+                        Assert.AreEqual(_sampleData[dataItemIndex].Item2, reader.GetString("TextColumn"));
+                        Assert.AreNotEqual(_sampleData[dataItemIndex].Item2, reader.GetString("EncryptedColumn")); //The encrypted text should not match the unencrypted text
+                        Assert.AreEqual(_sampleData[dataItemIndex].Item2, reader.GetDecrypted<string>("EncryptedColumn")); //The decrypted text should match the unencrypted text
 
                         dataItemIndex++;
                     }
@@ -176,7 +178,7 @@ namespace SimpleAdo.Sqlite.UnitTests
                 using (var cmd = new SqliteCommand(String.Format(insertSql2, tableName), db))
                 {
                     //Adding my records
-                    foreach (Tuple<DateTime, string> dataItem in sampleData)
+                    foreach (Tuple<DateTime, string> dataItem in _sampleData)
                     {
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add("@date", dataItem.Item1);
@@ -199,7 +201,7 @@ namespace SimpleAdo.Sqlite.UnitTests
                     try
                     {
                         //This should fail, because the value that is read from the column cannot be properly decrypted without the correct password
-                        Assert.AreEqual(sampleData[0].Item2, reader.GetDecrypted<string>("EncryptedColumn"));
+                        Assert.AreEqual(_sampleData[0].Item2, reader.GetDecrypted<string>("EncryptedColumn"));
                     }
                     catch (Exception e)
                     {
@@ -217,10 +219,12 @@ namespace SimpleAdo.Sqlite.UnitTests
             {
                 while (reader.Read())
                 {
-                    Assert.AreEqual(sampleData[0].Item2, reader.GetDecrypted<string>("EncryptedColumn")); //The decrypted text should match the unencrypted text
+                    Assert.AreEqual(_sampleData[0].Item2, reader.GetDecrypted<string>("EncryptedColumn")); //The decrypted text should match the unencrypted text
                 }
             }
         }
+
+        #endregion
 
         [OneTimeTearDown]
         public void Cleanup() => TempDatabaseFiles.CleanUp(this.GetType());
