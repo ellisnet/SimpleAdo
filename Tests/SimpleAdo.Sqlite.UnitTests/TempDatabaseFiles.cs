@@ -58,7 +58,9 @@ namespace SimpleAdo.Sqlite.UnitTests
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine($"Warning - error encountered while deleting temporary database file after test completion: {e}");
+                            //Temp database file deletion isn't working on the AppVeyor CI build server either; so decided not to warn about
+                            // it for now:
+                            //Console.WriteLine($"Warning - error encountered while deleting temporary database file after test completion: {e}");
                             //Debugger.Break();
                         }
                     }
