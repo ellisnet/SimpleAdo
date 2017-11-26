@@ -1,4 +1,6 @@
-﻿using System;
+﻿//This file - DatabasePath.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
+using System;
 using System.IO;
 
 namespace SampleApp.Services

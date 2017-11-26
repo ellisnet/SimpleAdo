@@ -1,4 +1,7 @@
-﻿using System;
+﻿//ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+//  The MainWindow XAML file was moved to the Views folder - and SampleApp.Views namespace - for this sample
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

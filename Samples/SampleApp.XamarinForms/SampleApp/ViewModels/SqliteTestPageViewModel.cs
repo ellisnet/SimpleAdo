@@ -10,6 +10,8 @@
    limitations under the License.
 */
 
+//This file - SqliteTestPageViewModel.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -29,12 +31,6 @@ namespace SampleApp.ViewModels
 
         public async Task<bool> RunTestsCommand(object sender, EventArgs e)
         {
-
-            #region ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
-
-            //using SimpleAdo;
-            //using SimpleAdo.Sqlite;
-
             string databasePath = App.AppDatabasePath.GetPath("sample.sqlite");
 
             await _view.DisplayAlert("Running tests...", $"Running tests in the SQLite database:\n{databasePath}", "OK");
@@ -179,8 +175,6 @@ namespace SampleApp.ViewModels
                     "An error occurred - check the IDE Output log window for details.",
                     "OK");
             }
-
-            #endregion
 
             return true;
         }

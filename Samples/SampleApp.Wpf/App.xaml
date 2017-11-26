@@ -5,7 +5,9 @@
              xmlns:viewModels="clr-namespace:SampleApp.ViewModels"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <!-- Note that since my ViewModels are in a separate 'MyApplication.ViewModels' namespace -
+        <!--ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+            Added a resource for the MainViewModel class. 
+            Note that since my ViewModels are in a separate 'MyApplication.ViewModels' namespace -
             I needed to add the following namespace reference line above:
             xmlns:viewModels="clr-namespace:MyApplication.ViewModels" -->
         <viewModels:MainViewModel x:Key="MainViewModel" />

@@ -15,8 +15,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+#region ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
 using SampleApp.Services;
 using SampleApp.Views;
+#endregion
 
 namespace SampleApp
 {

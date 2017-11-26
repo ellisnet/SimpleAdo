@@ -13,6 +13,8 @@
    limitations under the License.
 */
 
+//This file - MainViewModelForWindows.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 using System;
 using System.Linq;
 using System.Text;

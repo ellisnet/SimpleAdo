@@ -10,6 +10,8 @@
    limitations under the License.
 */
 
+//This file - IDatabasePath.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 namespace SampleApp.Services
 {
     /// <summary>

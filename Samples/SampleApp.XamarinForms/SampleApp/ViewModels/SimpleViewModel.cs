@@ -10,6 +10,8 @@
    limitations under the License.
 */
 
+//This file - SimpleViewModel.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 //FILE DATE/REVISION: 2/2/2016
 
 using System;

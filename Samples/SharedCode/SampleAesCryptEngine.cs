@@ -13,6 +13,8 @@
    limitations under the License.
 */
 
+//This file - SampleAesCryptEngine.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 using System;
 using System.Collections.Generic;
 #if NETFX_CORE && (!NETSTANDARD_2)

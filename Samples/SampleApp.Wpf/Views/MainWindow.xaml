@@ -21,3 +21,8 @@
         <TextBox Grid.Row="1" IsReadOnly="True" Text="{Binding Message}" Margin="10,10,10,10" />
     </Grid>
 </Window>
+<!--ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+    This XAML Page was generated as part of File - New Project by Visual studio.
+    However, the Grid element - and its child elements were added to the sample, as was the specification
+    of MainViewModel as the DataContext in the Window definition. Also, I moved it to the Views folder for
+    cleaner View-ViewModel distinction.-->

@@ -13,6 +13,8 @@
    limitations under the License.
 */
 
+//This file - DatabasePath.cs - was ADDED TO SAMPLE TO DEMONSTRATE SimpleAdo.Sqlite
+
 using System;
 
 // ReSharper disable once CheckNamespace
