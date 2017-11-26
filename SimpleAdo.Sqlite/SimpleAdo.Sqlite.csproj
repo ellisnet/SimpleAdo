@@ -6,7 +6,7 @@
     <Authors>Jeremy Ellis</Authors>
     <Company>Ellisnet</Company>
     <Product>(netstandard1.1)</Product>
-    <Description>Simple ADO is a .NetStandard package (previously would have been a Portable Class Library - PCL) that provides simple ADO-style operations for local databases; SimpleAdo.Sqlite supports local SQLite databases.  It has SqliteConnection, SqliteCommand and SqliteDataReader functionality for executing standard SQL commands on, and reading data from, local SQLite databases.</Description>
+    <Description>Simple ADO is a .NET Standard package (previously would have been a Portable Class Library - PCL) that provides simple ADO-style operations for local databases; SimpleAdo.Sqlite supports local SQLite databases.  It has SqliteConnection, SqliteCommand and SqliteDataReader functionality for executing standard SQL commands on, and reading data from, local SQLite databases.</Description>
     <Copyright>Copyright 2017 Ellisnet - Jeremy Ellis</Copyright>
     <PackageLicenseUrl>https://github.com/ellisnet/SimpleAdo/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ellisnet/SimpleAdo</PackageProjectUrl>
@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>simple;ado;ado.net;mobile;sqlite;database</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
