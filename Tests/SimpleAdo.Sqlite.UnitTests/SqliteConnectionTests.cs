@@ -639,6 +639,64 @@ namespace SimpleAdo.Sqlite.UnitTests
             Assert.AreEqual(intendedSchemaVersion, schemaVersionAfterSet);
         }
 
+        [Test]
+        public void SchemaVersion_CheckAndSetVersion_ManagesConnectionStateProperly()
+        {
+            //Arrange
+            string dbPath = TempDatabaseFiles.GetNewDatabasePath(this);
+            long schemaVersionBeforeSet;
+            long intendedSchemaVersion = 23;
+            long schemaVersionAfterSet;
+            ConnectionState beforeGetClosed;
+            ConnectionState afterGetClosed;
+            ConnectionState beforeGetOpen;
+            ConnectionState afterGetOpen;
+            ConnectionState beforeSetClosed;
+            ConnectionState afterSetClosed;
+            ConnectionState beforeSetOpen;
+            ConnectionState afterSetOpen;
+
+            //Act
+            using (var db = new SqliteConnection(dbPath, true))
+            {
+                schemaVersionBeforeSet = db.GetDatabaseSchemaVersion();
+                db.SafeClose(); //Want the database closed so we can make sure that setting
+                                //  the schema doesn't require the connection to be open.
+                beforeSetClosed = db.State;
+                db.SetDatabaseSchemaVersion(intendedSchemaVersion);
+                afterSetClosed = db.State;
+                db.SafeOpen();  //Should now be open
+                beforeSetOpen = db.State;
+                db.SetDatabaseSchemaVersion(intendedSchemaVersion);
+                afterSetOpen = db.State;
+            }
+
+            using (var db = new SqliteConnection(dbPath, true))
+            {
+                beforeGetClosed = db.State;
+                schemaVersionAfterSet = db.GetDatabaseSchemaVersion();
+                afterGetClosed = db.State;
+                db.SafeOpen();
+                beforeGetOpen = db.State;
+                schemaVersionAfterSet = db.GetDatabaseSchemaVersion();
+                afterGetOpen = db.State;
+            }
+
+            //Assert
+            Assert.AreEqual(0, schemaVersionBeforeSet);
+            Assert.AreEqual(intendedSchemaVersion, schemaVersionAfterSet);
+
+            Assert.AreEqual(ConnectionState.Closed, beforeSetClosed); //Should be closed because just closed
+            Assert.AreEqual(ConnectionState.Closed, afterSetClosed); //Should be closed if previously closed
+            Assert.AreEqual(ConnectionState.Open, beforeSetOpen); //Should be open because just opened
+            Assert.AreEqual(ConnectionState.Open, afterSetOpen); //Should be open if previously open
+
+            Assert.AreEqual(ConnectionState.Closed, beforeGetClosed); //Should be closed before activity, or explicit Open()
+            Assert.AreEqual(ConnectionState.Closed, afterGetClosed); //Should be closed if previously closed
+            Assert.AreEqual(ConnectionState.Open, beforeGetOpen); //Should be open because just opened
+            Assert.AreEqual(ConnectionState.Open, afterGetOpen); //Should be open if previously open
+        }
+
         #endregion
 
         [OneTimeTearDown]

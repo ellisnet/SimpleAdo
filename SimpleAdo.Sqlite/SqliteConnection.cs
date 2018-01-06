@@ -342,21 +342,29 @@ namespace SimpleAdo.Sqlite {
 	        }
 	    }
 
-        /// <summary> Gets database schema version. </summary>
+        /// <summary> Gets database schema version - leaves the connection state in the state it was found (open/closed). </summary>
         /// <returns> The database schema version. </returns>
 	    public long GetDatabaseSchemaVersion()
 	    {
-	        SafeOpen();
-	        return (long) this.ExecuteScalar("PRAGMA user_version;", Database.IsDatabaseInMaintenanceMode);
+	        //Leave the connection in the state we found it - open or closed
+	        bool wasClosed = (State == ConnectionState.Closed);
+            SafeOpen();
+	        long result = (long) this.ExecuteScalar("PRAGMA user_version;", Database.IsDatabaseInMaintenanceMode);
+            if (wasClosed) { SafeClose();}
+	        return result;
 	    }
 
-        /// <summary> Sets database schema version. </summary>
+        /// <summary> Sets database schema version - leaves the connection state in the state it was found (open/closed). </summary>
         /// <param name="version"> The version. </param>
 	    public void SetDatabaseSchemaVersion(long version)
 	    {
+            //Leave the connection in the state we found it - open or closed
+	        bool wasClosed = (State == ConnectionState.Closed);
+            SafeOpen();
 	        _database.BeginMaintenanceMode();
-	        this.ExecuteNonQuery($"PRAGMA user_version = {version};", true);
-	        _database.EndMaintenanceMode();
+            this.ExecuteNonQuery($"PRAGMA user_version = {version};", true);
+	        if (wasClosed) { SafeClose(); }
+            _database.EndMaintenanceMode();
 	    }
 
         /// <summary> Queries if a given table exists. </summary>
