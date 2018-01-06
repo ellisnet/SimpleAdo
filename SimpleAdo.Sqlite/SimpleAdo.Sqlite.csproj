@@ -18,6 +18,10 @@
     <Version>1.1.0</Version>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
+    <PackageReleaseNotes>v1.1.0 - Fixes for managing SqliteConnection state when Getting or Setting the database schema version. Now neither of these operations require and explicit SqliteConnection.Open() command; and each will leave the SqliteConnection in the connection state that it was in when they found it - i.e. Open or Closed.  
+***BREAKING CHANGE*** Previously, calling the GetDatabaseSchemaVersion() would leave the SqliteConnection.State as ConnectionState.Open; now it will leave it in the state it found it (Open or Closed).  So, if you have code that assumes that the SqliteConnection is open after calling GetDatabaseSchemaVersion(), you should add a call to SqliteConnection.SafeOpen() above this code.
+
+v1.0.11 - Initial release - all functionality should be working, but Sqlite Transaction functionality remains untested.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
