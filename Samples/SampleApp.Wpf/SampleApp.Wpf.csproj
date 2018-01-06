@@ -43,11 +43,11 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleAdo.Core, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleAdo.Core.1.0.11\lib\netstandard1.1\SimpleAdo.Core.dll</HintPath>
+    <Reference Include="SimpleAdo.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleAdo.Core.1.1.0\lib\netstandard1.1\SimpleAdo.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleAdo.Sqlite, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleAdo.Sqlite.1.0.11\lib\netstandard1.1\SimpleAdo.Sqlite.dll</HintPath>
+    <Reference Include="SimpleAdo.Sqlite, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleAdo.Sqlite.1.1.0\lib\netstandard1.1\SimpleAdo.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.9\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
